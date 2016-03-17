@@ -104,3 +104,8 @@
 
 
 (put 'scroll-left 'disabled nil)
+
+(require 'magit-find-file)
+(global-set-key (kbd "C-c p") 'magit-find-file-completing-read)
+
+(global-set-key (kbd "C-x f") 'find-file-in-repository)
