@@ -30,6 +30,9 @@
                     ("melpa" . "http://melpa.org/packages/")))
 
 (package-initialize)
+
+;; custom options
+
 (when (not package-archive-contents)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -59,7 +62,7 @@
 (set-default-font "Menlo 18")
 (tool-bar-mode 0)
 
-(setq mac-command-modifier 'control)
+;;(setq mac-command-modifier 'control)
 
 (global-set-key (kbd "<S-tab>") 'un-indent-by-removing-2-spaces)
 (defun un-indent-by-removing-2-spaces ()
@@ -91,8 +94,8 @@
 (require 'yaml-mode)
    (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+;;(when (memq window-system '(mac ns))
+;;  (exec-path-from-shell-initialize))
 
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
