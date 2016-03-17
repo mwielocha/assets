@@ -1,0 +1,103 @@
+;; global variables
+(setq
+ inhibit-startup-screen t
+ create-lockfiles nil
+ make-backup-files nil
+ column-number-mode t
+ scroll-error-top-bottom t
+ show-paren-delay 0.5
+ use-package-always-ensure t
+ sentence-end-double-space nil)
+
+;; buffer local variables
+(setq-default
+ indent-tabs-mode nil
+ tab-width 4
+ c-basic-offset 4)
+
+;; modes
+(electric-indent-mode 0)
+
+;; global keybindings
+(global-unset-key (kbd "C-z"))
+
+;; the package manager
+(require 'package)
+(setq
+ use-package-always-ensure t
+ package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                    ("org" . "http://orgmode.org/elpa/")
+                    ("melpa" . "http://melpa.org/packages/")))
+
+(package-initialize)
+(when (not package-archive-contents)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+
+(define-key input-decode-map "\e[1;2D" [S-left])  
+(define-key input-decode-map "\e[1;2C" [S-right])  
+(define-key input-decode-map "\e[1;2B" [S-down])  
+(define-key input-decode-map "\e[1;2A" [S-up])  
+(define-key input-decode-map "\e[1;2F" [S-end])  
+(define-key input-decode-map "\e[1;2H" [S-home])
+
+
+;; use Shift+arrow_keys to move cursor around split panes
+;;(windmove-default-keybindings)
+
+;; when cursor is on edge, move to the other side, as in a torus space
+(setq windmove-wrap-around t )
+
+(global-linum-mode t)
+(setq-default truncate-lines 1)
+
+(scroll-bar-mode 0)
+(fset `yes-or-no-p `y-or-n-p)
+
+(load-theme 'idea-darkula t)
+(set-default-font "Menlo 18")
+(tool-bar-mode 0)
+
+(setq mac-command-modifier 'control)
+
+(global-set-key (kbd "<S-tab>") 'un-indent-by-removing-2-spaces)
+(defun un-indent-by-removing-2-spaces ()
+  "remove 2 spaces from beginning of of line"
+  (interactive)
+  (save-excursion
+    (save-match-data
+      (beginning-of-line)
+      ;; get rid of tabs at beginning of line
+      (when (looking-at "^\\s-+")
+        (untabify (match-beginning 0) (match-end 0)))
+      (when (looking-at "^  ")
+        (replace-match "")))))
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
+
+(global-set-key [wheel-right] 'scroll-left)
+(global-set-key [wheel-left] 'scroll-right)
+
+(toggle-frame-fullscreen)
+
+;; magit key bidings
+
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; yaml
+
+(require 'yaml-mode)
+   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+
+(put 'scroll-left 'disabled nil)
