@@ -92,11 +92,12 @@
 
 (global-set-key (kbd "s-=") 'toggle-frame-fullscreen)
 
-;; magit key bidings
+(global-set-key (kbd "s-]") 'ace-window)
+(setq aw-dispatch-always t)
 
 (global-set-key (kbd "s-\\") 'ensime-search)
 (global-set-key (kbd "C-x g") 'magit-status)
-
+(global-set-key (kbd "s-/") 'other-frame)
 ;; yaml
 
 (require 'yaml-mode)
