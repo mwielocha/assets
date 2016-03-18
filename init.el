@@ -45,6 +45,13 @@
 (define-key input-decode-map "\e[1;2F" [S-end])  
 (define-key input-decode-map "\e[1;2H" [S-home])
 
+(global-set-key (kbd "s-<up>") 'scroll-down-command)
+(global-set-key (kbd "s-<down>") 'scroll-up-command)
+(global-set-key (kbd "s-<left>") 'beginning-of-line)
+(global-set-key (kbd "s-<right>") 'end-of-line)
+
+(global-set-key (kbd "s-w") 'mac-key-close-window)
+(global-set-key (kbd "s-l") 'goto-line)
 
 ;; use Shift+arrow_keys to move cursor around split panes
 ;;(windmove-default-keybindings)
@@ -83,10 +90,11 @@
 (global-set-key [wheel-right] 'scroll-left)
 (global-set-key [wheel-left] 'scroll-right)
 
-(toggle-frame-fullscreen)
+(global-set-key (kbd "s-=") 'toggle-frame-fullscreen)
 
 ;; magit key bidings
 
+(global-set-key (kbd "s-\\") 'ensime-search)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; yaml
@@ -109,3 +117,7 @@
 (global-set-key (kbd "C-c p") 'magit-find-file-completing-read)
 
 (global-set-key (kbd "C-x f") 'find-file-in-repository)
+
+;;(require 'redo)
+;;(require 'mac-key-mode)
+;;(mac-key-mode 1)
