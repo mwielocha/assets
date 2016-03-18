@@ -119,6 +119,8 @@
 
 (global-set-key (kbd "C-x f") 'find-file-in-repository)
 
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
 ;;(require 'redo)
 ;;(require 'mac-key-mode)
 ;;(mac-key-mode 1)
