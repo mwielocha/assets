@@ -20,6 +20,9 @@
 
 ;; global keybindings
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "s-p"))
+
+(delete-selection-mode 1)
 
 ;; the package manager
 (require 'package)
@@ -92,7 +95,7 @@
 
 (global-set-key (kbd "s-=") 'toggle-frame-fullscreen)
 
-(global-set-key (kbd "s-]") 'ace-window)
+(global-set-key (kbd "s-p") 'ace-window)
 (setq aw-dispatch-always t)
 
 (global-set-key (kbd "s-\\") 'ensime-search)
@@ -121,6 +124,25 @@
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
-;;(require 'redo)
-;;(require 'mac-key-mode)
-;;(mac-key-mode 1)
+(setq scala-indent:use-javadoc-style t)
+
+(defun test-only ()
+  "Run test with current file."
+  (interactive)
+  (sbt-command (concat "testOnly " (find-spec-name))))
+
+(defun find-spec-name ()
+  "Find spec name of current buffer."
+  (concat "*." (file-name-sans-extension (file-name-nondirectory (buffer-name)))))
+
+(defun compile-sbt-project ()
+  "Compile the sbt project."
+  (sbt-command "test:compile")
+  )
+
+(add-hook 'scala-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook 'compile-sbt-project)))
+
+(provide 'prelude-scala-sbt)
+;;; prelude-scala-sbt.el ends here
