@@ -90,8 +90,8 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
-(global-set-key [wheel-right] 'scroll-left)
-(global-set-key [wheel-left] 'scroll-right)
+;;(global-set-key [wheel-right] 'scroll-left)
+;;(global-set-key [wheel-left] 'scroll-right)
 
 (global-set-key (kbd "s-=") 'toggle-frame-fullscreen)
 
@@ -126,6 +126,12 @@
 
 (setq scala-indent:use-javadoc-style t)
 
+;;(defun ensime-setup ()
+;;  "Open sbt project and setup ensime."
+;;  (interactive)
+;;  (sbt-command "gen-ensime")
+;;  (ensime "./.ensime"))
+
 (defun test-only ()
   "Run test with current file."
   (interactive)
@@ -140,9 +146,9 @@
   (sbt-command "test:compile")
   )
 
-(add-hook 'scala-mode-hook
-          (lambda ()
-            (add-hook 'after-save-hook 'compile-sbt-project)))
+;;(add-hook 'scala-mode-hook
+;;          (lambda ()
+;;            (add-hook 'after-save-hook 'compile-sbt-project)))
 
 (provide 'prelude-scala-sbt)
 ;;; prelude-scala-sbt.el ends here
