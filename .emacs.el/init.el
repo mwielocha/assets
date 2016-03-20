@@ -36,7 +36,7 @@
                    async git-commit with-editor dash async
                    dash with-editor dash async dash async
                    magit-popup dash async monokai-theme
-                   play-routes-mode popup-imenu
+                   play-routes-mode popup-imenu yatemplate
                    flx-ido flx popup dash projectile pkg-info
                    epl dash python-mode s sbt-mode scala-mode2
                    scala-mode2 slack emojify ht seq alert
@@ -256,6 +256,14 @@
 
 (global-set-key (kbd "M-.") 'projectile-find-tag)
 (global-set-key (kbd "M-,") 'pop-tag-mark)
+
+(use-package yatemplate
+  :defer 2 ;; WORKAROUND https://github.com/mineo/yatemplate/issues/3
+  :config
+  (auto-insert-mode)
+  (setq auto-insert-alist nil)
+  (yatemplate-fill-alist))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -298,3 +306,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
