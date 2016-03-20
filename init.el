@@ -25,14 +25,43 @@
 (delete-selection-mode 1)
 
 ;; the package manager
-(require 'package)
-(setq
- use-package-always-ensure t
- package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                    ("org" . "http://orgmode.org/elpa/")
-                    ("melpa" . "http://melpa.org/packages/")))
 
+; list the packages you want
+(setq package-list
+      '(ace-window avy ag s dash avy borland-blue-theme
+                   cyberpunk-theme ensime popup s dash
+                   company yasnippet sbt-mode scala-mode2
+                   scala-mode2 etags-select find-file-in-repository
+                   goto-chg highlight-symbol idea-darkula-theme
+                   magit-find-file dash magit magit-popup dash
+                   async git-commit with-editor dash async
+                   dash with-editor dash async dash async
+                   magit-popup dash async moe-theme
+                   monokai-theme play-routes-mode popup-imenu
+                   flx-ido flx popup dash projectile pkg-info
+                   epl dash python-mode s sbt-mode scala-mode2
+                   scala-mode2 slack emojify ht seq alert
+                   log4e gntp circe oauth2 request websocket
+                   smartparens dash tangotango-theme
+                   use-package diminish bind-key websocket
+                   with-editor dash async yaml-mode yasnippet))
+
+; list the repositories containing them
+(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+
+; activate all the packages (in particular autoloads)
 (package-initialize)
+
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
 ;; custom options
 
@@ -152,3 +181,78 @@
 
 (provide 'prelude-scala-sbt)
 ;;; prelude-scala-sbt.el ends here
+
+(use-package projectile
+  :demand
+  ;; nice to have it on the modeline
+  :init
+  (setq projectile-use-git-grep t)
+  :config
+  (projectile-global-mode)
+  (add-hook 'projectile-grep-finished-hook
+            ;; not going to the first hit?
+            (lambda () (pop-to-buffer next-error-last-buffer)))
+  :bind
+  (("s-f" . projectile-find-file)
+   ("s-F" . projectile-grep)))
+
+(use-package smartparens
+  :diminish smartparens-mode
+  :commands
+  smartparens-strict-mode
+  smartparens-mode
+  sp-restrict-to-pairs-interactive
+  sp-local-pair
+  :init
+  (setq sp-interactive-dwim t)
+  :config
+  (require 'smartparens-config)
+  (sp-use-smartparens-bindings)
+
+  (sp-pair "(" ")" :wrap "C-(") ;; how do people live without this?
+  (sp-pair "[" "]" :wrap "s-[") ;; C-[ sends ESC
+  (sp-pair "{" "}" :wrap "C-{")
+
+  ;; WORKAROUND https://github.com/Fuco1/smartparens/issues/543
+  (bind-key "C-<left>" nil smartparens-mode-map)
+  (bind-key "C-<right>" nil smartparens-mode-map)
+
+  (bind-key "s-<delete>" 'sp-kill-sexp smartparens-mode-map)
+  (bind-key "s-<backspace>" 'sp-backward-kill-sexp smartparens-mode-map))
+
+
+(sp-local-pair 'scala-mode "(" nil :post-handlers '(("||\n[i]" "RET")))
+(sp-local-pair 'scala-mode "{" nil :post-handlers '(("||\n[i]" "RET") ("| " "SPC")))
+
+
+(defun scala-mode-newline-comments ()
+  "Custom newline appropriate for `scala-mode'."
+  ;; shouldn't this be in a post-insert hoo  (interactive)
+  (newline-and-indent)
+  (scala-indent:insert-asterisk-on-multiline-comment))
+
+;;(bind-key "RET" 'scala-mode-newline-comments scala-mode-map)
+
+(setq comment-start "/* "
+	  comment-end " */"
+	  comment-style 'multi-line
+	  comment-empty-lines t)
+
+(global-set-key (kbd "s-/") 'comment-region)
+(global-set-key (kbd "s-?") 'uncomment-region)
+
+
+(use-package etags-select
+  :commands etags-select-find-tag)
+
+(defun ensime-edit-definition-with-fallback ()
+  "Variant of `ensime-edit-definition' with ctags if ENSIME is not available."
+  (interactive)
+  (unless (and (ensime-connection-or-nil)
+               (ensime-edit-definition))
+    (projectile-find-tag)))
+
+(bind-key "M-." 'ensime-edit-definition-with-fallback ensime-mode-map)
+
+(global-set-key (kbd "M-.") 'projectile-find-tag)
+(global-set-key (kbd "M-,") 'pop-tag-mark)
