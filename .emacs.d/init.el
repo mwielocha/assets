@@ -99,9 +99,11 @@
 (fset `yes-or-no-p `y-or-n-p)
 
 (load-theme 'ujelly t)
-(require 'spaceline-config)
 
+(require 'spaceline-config)
 (spaceline-emacs-theme)
+(spaceline-helm-mode)
+
 (set-default-font "Menlo 18")
 
 (tool-bar-mode 0)
