@@ -42,7 +42,8 @@
                    scala-mode2 slack emojify ht seq alert
                    log4e gntp circe oauth2 request websocket
                    smartparens dash  use-package diminish bind-key websocket
-                   with-editor dash async yaml-mode yasnippet color-theme-sanityinc-tomorrow))
+                   with-editor dash async yaml-mode yasnippet
+                   color-theme-sanityinc-tomorrow helm spacemacs-theme spaceline))
 
 ; list the repositories containing them
 (setq
@@ -97,8 +98,12 @@
 (scroll-bar-mode 0)
 (fset `yes-or-no-p `y-or-n-p)
 
-;;(load-theme 'idea-darkula t)
+(load-theme 'ujelly t)
+(require 'spaceline-config)
+
+(spaceline-emacs-theme)
 (set-default-font "Menlo 18")
+
 (tool-bar-mode 0)
 
 ;;(setq mac-command-modifier 'control)
@@ -130,6 +135,24 @@
 (global-set-key (kbd "s-\\") 'ensime-search)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "s-/") 'other-frame)
+
+;; multi-web-mode
+(require 'multi-web-mode)
+(setq mweb-default-major-mode 'html-mode)
+(setq mweb-tags 
+  '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+    (js-mode  "<script[^>]*>" "</script>")
+    (css-mode "<style[^>]*>" "</style>")))
+(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+(multi-web-global-mode 1)
+
+;; helm
+(require 'helm-config)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(helm-mode 1)
+(setq helm-mode-fuzzy-match t)
+(helm-autoresize-mode 1)
+
 ;; yaml
 
 (require 'yaml-mode)
@@ -263,48 +286,17 @@
   (auto-insert-mode)
   (setq auto-insert-alist nil)
   (yatemplate-fill-alist))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#1d1f21"))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
    (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
- '(fci-rule-color "#003f8e")
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#ff9da4")
-     (40 . "#ffc58f")
-     (60 . "#ffeead")
-     (80 . "#d1f1a9")
-     (100 . "#99ffff")
-     (120 . "#bbdaff")
-     (140 . "#ebbbff")
-     (160 . "#ff9da4")
-     (180 . "#ffc58f")
-     (200 . "#ffeead")
-     (220 . "#d1f1a9")
-     (240 . "#99ffff")
-     (260 . "#bbdaff")
-     (280 . "#ebbbff")
-     (300 . "#ff9da4")
-     (320 . "#ffc58f")
-     (340 . "#ffeead")
-     (360 . "#d1f1a9"))))
- '(vc-annotate-very-old-color nil))
+    ("99953b61ecd4c3e414a177934e888ce9ee12782bbaf2125ec2385d5fd732cbc2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-
