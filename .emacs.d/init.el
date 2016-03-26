@@ -40,9 +40,9 @@
                    flx-ido flx popup dash projectile pkg-info
                    epl dash python-mode s sbt-mode scala-mode2
                    scala-mode2 slack emojify ht seq alert
-                   log4e gntp circe oauth2 request websocket
+                   log4e gntp circe oauth2 request websocket multi-web-mode
                    smartparens dash  use-package diminish bind-key websocket
-                   with-editor dash async yaml-mode yasnippet
+                   with-editor dash async yaml-mode yasnippet ujelly-theme
                    color-theme-sanityinc-tomorrow helm spacemacs-theme spaceline))
 
 ; list the repositories containing them
@@ -270,17 +270,17 @@
 (use-package etags-select
   :commands etags-select-find-tag)
 
-(defun ensime-edit-definition-with-fallback ()
-  "Variant of `ensime-edit-definition' with ctags if ENSIME is not available."
-  (interactive)
-  (unless (and (ensime-connection-or-nil)
-               (ensime-edit-definition))
-    (projectile-find-tag)))
+;;(defun ensime-edit-definition-with-fallback ()
+;;  "Variant of `ensime-edit-definition' with ctags if ENSIME is not available."
+;;  (interactive)
+;;  (unless (and (ensime-connection-or-nil)
+;;               (ensime-edit-definition))
+;;    (projectile-find-tag)))
 
-(bind-key "M-." 'ensime-edit-definition-with-fallback ensime-mode-map)
+;;(bind-key "M-." 'ensime-edit-definition ensime-mode-map)
 
-(global-set-key (kbd "M-.") 'projectile-find-tag)
-(global-set-key (kbd "M-,") 'pop-tag-mark)
+;;(global-set-key (kbd "M-.") 'projectile-find-tag)
+;;(global-set-key (kbd "M-,") 'pop-tag-mark)
 
 (use-package yatemplate
   :defer 2 ;; WORKAROUND https://github.com/mineo/yatemplate/issues/3
