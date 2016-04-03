@@ -138,6 +138,9 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "s-/") 'other-frame)
 
+(global-set-key (kbd "<C-s-right>") 'next-multiframe-window)
+(global-set-key (kbd "<C-s-left>") 'previous-multiframe-window)
+                
 ;; multi-web-mode
 (require 'multi-web-mode)
 (setq mweb-default-major-mode 'html-mode)
