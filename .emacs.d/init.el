@@ -22,6 +22,8 @@
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "s-p"))
 
+(global-unset-key (kbd "s-n"))
+
 (delete-selection-mode 1)
 
 ;; the package manager
