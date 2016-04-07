@@ -44,7 +44,7 @@
                    scala-mode2 slack emojify ht seq alert
                    log4e gntp circe oauth2 request websocket multi-web-mode
                    smartparens dash  use-package diminish bind-key websocket
-                   with-editor dash async yaml-mode yasnippet ujelly-theme
+                   with-editor dash async yaml-mode yasnippet ujelly-theme org
                    color-theme-sanityinc-tomorrow helm spacemacs-theme spaceline))
 
 ; list the repositories containing them
@@ -169,6 +169,10 @@
 ;;  (exec-path-from-shell-initialize))
 
 (setq exec-path (append exec-path '("/usr/local/bin")))
+
+;; org
+
+(setq org-table-convert-region-max-lines 9999)
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
