@@ -45,7 +45,7 @@
                    log4e gntp circe oauth2 request websocket multi-web-mode
                    smartparens dash  use-package diminish bind-key websocket
                    with-editor dash async yaml-mode yasnippet ujelly-theme
-                   color-theme-sanityinc-tomorrow helm spacemacs-theme spaceline))
+                   color-theme-sanityinc-tomorrow helm helm-ag spacemacs-theme spaceline))
 
 ; list the repositories containing them
 (setq
@@ -159,6 +159,10 @@
 (helm-mode 1)
 (setq helm-mode-fuzzy-match t)
 (helm-autoresize-mode 1)
+
+;; ag
+
+(setq ag-executable "/usr/local/bin/ag")
 
 ;; yaml
 
