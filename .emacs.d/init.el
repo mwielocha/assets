@@ -160,6 +160,19 @@
 (setq helm-mode-fuzzy-match t)
 (helm-autoresize-mode 1)
 
+;; kill others
+
+(defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer 
+          (delq (current-buffer) 
+                (remove-if-not 'buffer-file-name (buffer-list)))))
+
+;; last change
+
+(global-set-key (kbd "<s-backspace>") 'goto-last-change)
+
 ;; ag
 
 (setq ag-executable "/usr/local/bin/ag")
