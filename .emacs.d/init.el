@@ -137,6 +137,7 @@
 (setq aw-dispatch-always t)
 
 (global-set-key (kbd "s-\\") 'ensime-search)
+(global-set-key (kbd "s-n") 'ensime-search)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "s-/") 'other-frame)
 
