@@ -193,9 +193,7 @@
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
-
-(put 'scroll-left 'disabled nil)
+(add-hook 'java-mode-hook 'ensime-scala-mode-hook)
 
 (require 'magit-find-file)
 (global-set-key (kbd "C-c p") 'magit-find-file-completing-read)
