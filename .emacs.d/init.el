@@ -163,8 +163,8 @@
 (setq helm-mode-fuzzy-match t)
 (helm-autoresize-mode 1)
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin/"))
+(setq exec-path (append exec-path '("/usr/local/bin/")))
 
 ;; kill others
 
