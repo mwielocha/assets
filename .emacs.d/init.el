@@ -31,7 +31,7 @@
 ; list the packages you want
 (setq package-list
       '(ace-window avy ag s dash avy cyberpunk-theme ensime popup s dash
-                   company yasnippet sbt-mode scala-mode2
+                   company yasnippet sbt-mode scala-mode2 undo-tree
                    scala-mode2 etags-select find-file-in-repository
                    goto-chg highlight-symbol idea-darkula-theme
                    magit-find-file dash magit magit-popup dash
@@ -87,6 +87,12 @@
 
 (global-set-key (kbd "s-w") 'mac-key-close-window)
 (global-set-key (kbd "s-l") 'goto-line)
+
+;; tree-undo
+
+(global-undo-tree-mode)
+(global-set-key (kbd "s-Z") 'undo-tree-redo)
+(global-set-key (kbd "s-z") 'undo-tree-undo)
 
 ;; use Shift+arrow_keys to move cursor around split panes
 ;;(windmove-default-keybindings)
@@ -295,7 +301,6 @@
 
 (global-set-key (kbd "s-/") 'comment-region)
 (global-set-key (kbd "s-?") 'uncomment-region)
-
 
 (use-package etags-select
   :commands etags-select-find-tag)
