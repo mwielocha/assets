@@ -88,6 +88,8 @@
 (global-set-key (kbd "s-w") 'mac-key-close-window)
 (global-set-key (kbd "s-l") 'goto-line)
 
+(show-paren-mode)
+
 ;; tree-undo
 
 (global-undo-tree-mode)
