@@ -314,7 +314,7 @@
 
 ;;(bind-key "M-." 'ensime-edit-definition ensime-mode-map)
 
-(bind-key (kbd "<s-mouse-1>")  'ensime-edit-definition ensime-mode-map)
+;;(bind-key (kbd "<s-mouse-1>")  'ensime-edit-definition ensime-mode-map)
 
 ;;(global-set-key (kbd "M-.") 'projectile-find-tag)
 ;;(global-set-key (kbd "M-,") 'pop-tag-mark)
