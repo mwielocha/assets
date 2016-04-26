@@ -44,7 +44,7 @@
                    scala-mode2 slack emojify ht seq alert
                    log4e gntp circe oauth2 request websocket multi-web-mode
                    smartparens dash  use-package diminish bind-key websocket
-                   with-editor dash async yaml-mode yasnippet ujelly-theme org
+                   with-editor dash async yaml-mode yasnippet ujelly-theme org avy
                    color-theme-sanityinc-tomorrow helm helm-ag spacemacs-theme spaceline))
 
 ; list the repositories containing them
@@ -95,6 +95,12 @@
 (global-undo-tree-mode)
 (global-set-key (kbd "s-Z") 'undo-tree-redo)
 (global-set-key (kbd "s-z") 'undo-tree-undo)
+
+;; avy
+
+(use-package avy
+  :ensure t
+  :bind (("M-s" . avy-goto-word-1)))
 
 ;; use Shift+arrow_keys to move cursor around split panes
 ;;(windmove-default-keybindings)
