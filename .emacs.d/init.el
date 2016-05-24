@@ -41,7 +41,7 @@
                    play-routes-mode popup-imenu yatemplate
                    flx-ido flx popup dash projectile pkg-info
                    epl dash python-mode s sbt-mode
-                   scala-mode2 slack emojify ht seq alert which-key
+                   scala-mode slack emojify ht seq alert which-key
                    log4e gntp circe oauth2 request websocket multi-web-mode
                    smartparens dash  use-package diminish bind-key websocket
                    with-editor dash async yaml-mode yasnippet ujelly-theme org avy
