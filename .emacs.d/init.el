@@ -31,8 +31,8 @@
 ; list the packages you want
 (setq package-list
       '(ace-window avy ag s dash avy cyberpunk-theme ensime popup s dash
-                   company yasnippet sbt-mode scala-mode2 undo-tree
-                   scala-mode2 etags-select find-file-in-repository
+                   company yasnippet sbt-mode undo-tree
+                   etags-select find-file-in-repository
                    goto-chg highlight-symbol idea-darkula-theme
                    magit-find-file dash magit magit-popup dash
                    async git-commit with-editor dash async
@@ -40,7 +40,7 @@
                    magit-popup dash async monokai-theme
                    play-routes-mode popup-imenu yatemplate
                    flx-ido flx popup dash projectile pkg-info
-                   epl dash python-mode s sbt-mode scala-mode2
+                   epl dash python-mode s sbt-mode
                    scala-mode2 slack emojify ht seq alert which-key
                    log4e gntp circe oauth2 request websocket multi-web-mode
                    smartparens dash  use-package diminish bind-key websocket
