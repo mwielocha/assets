@@ -30,7 +30,7 @@
 
 ; list the packages you want
 (setq package-list
-      '(ace-window avy ag s dash avy cyberpunk-theme ensime popup s dash
+      '(ace-window avy ag s dash avy cyberpunk-theme popup s dash
                    company yasnippet sbt-mode undo-tree
                    etags-select find-file-in-repository
                    goto-chg highlight-symbol idea-darkula-theme
@@ -52,8 +52,8 @@
  use-package-always-ensure t
  package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                     ("org" . "http://orgmode.org/elpa/")
+					("melpa-stable" . "http://stable.melpa.org/packages/")
                     ("melpa" . "http://melpa.org/packages/")))
-
 ; activate all the packages (in particular autoloads)
 (package-initialize)
 
@@ -214,6 +214,9 @@
 ;; org
 
 (setq org-table-convert-region-max-lines 9999)
+
+(use-package ensime
+  :pin melpa-stable)
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
