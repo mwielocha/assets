@@ -90,7 +90,5 @@ zstyle ':completion:*' matcher-list '' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
 
-alias jdk6="export JAVA_HOME="`/usr/libexec/java_home -v '1.6*'`""
-alias jdk7="export JAVA_HOME="`/usr/libexec/java_home -v '1.7*'`""
-alias jdk8="export JAVA_HOME="`/usr/libexec/java_home -v '1.8*'`""
-alias jdk="java -version"
+#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
+[[ -s "/Users/mwielocha/.jenv/bin/jenv-init.sh" ]] && source "/Users/mwielocha/.jenv/bin/jenv-init.sh" && source "/Users/mwielocha/.jenv/commands/completion.sh"
