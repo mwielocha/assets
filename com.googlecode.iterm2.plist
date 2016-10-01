@@ -1756,12 +1756,16 @@
 			<true/>
 			<key>Background Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.076218985021114349</real>
+				<real>0.0</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.076217696070671082</real>
+				<real>0.0</real>
 				<key>Red Component</key>
-				<real>0.07621997594833374</real>
+				<real>0.0</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -2520,12 +2524,16 @@
 			<true/>
 			<key>Background Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.076218985021114349</real>
+				<real>0.0</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.076217696070671082</real>
+				<real>0.0</real>
 				<key>Red Component</key>
-				<real>0.07621997594833374</real>
+				<real>0.0</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -3132,6 +3140,10 @@
 	</array>
 	<key>NoSyncInstallationId</key>
 	<string>0BACEF57-8A0C-41E0-85F1-4B9305A7771E</string>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>497026118.22703701</real>
 	<key>OnlyWhenMoreTabs</key>
