@@ -32,7 +32,7 @@
 (setq package-list
       '(ace-window avy ag s dash avy cyberpunk-theme popup s dash
                    company yasnippet sbt-mode undo-tree
-                   etags-select find-file-in-repository
+                   find-file-in-repository
                    goto-chg highlight-symbol idea-darkula-theme
                    magit-find-file dash magit magit-popup dash
                    async git-commit with-editor dash async
@@ -118,7 +118,7 @@
 (scroll-bar-mode 0)
 (fset `yes-or-no-p `y-or-n-p)
 
-(load-theme 'ujelly t)
+;;(load-theme 'monokai t)
 
 (require 'spaceline-config)
 (spaceline-emacs-theme)
@@ -206,6 +206,10 @@
 (require 'yaml-mode)
    (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
+;; javascript
+
+(setq js-indent-level 2)
+
 ;;(when (memq window-system '(mac ns))
 ;;  (exec-path-from-shell-initialize))
 
@@ -216,10 +220,13 @@
 (setq org-table-convert-region-max-lines 9999)
 
 (use-package ensime
-  :pin melpa-stable)
+  :ensure t
+  :pin melpa)
+
+;;setq ensime-server-version "2.0.0-SNAPSHOT")
 
 (require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'java-mode-hook 'ensime-scala-mode-hook)
 
 (require 'magit-find-file)
@@ -317,8 +324,8 @@
 (global-set-key (kbd "s-/") 'comment-region)
 (global-set-key (kbd "s-?") 'uncomment-region)
 
-(use-package etags-select
-  :commands etags-select-find-tag)
+;(use-package etags-select
+;  :commands etags-select-find-tag)
 
 ;;(defun ensime-edit-definition-with-fallback ()
 ;;  "Variant of `ensime-edit-definition' with ctags if ENSIME is not available."
@@ -347,10 +354,16 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("99953b61ecd4c3e414a177934e888ce9ee12782bbaf2125ec2385d5fd732cbc2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default))))
+    ("f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "99473228af8c280ed5534952a1a687732c2450d076528c6363ec23febccccd7b" "99953b61ecd4c3e414a177934e888ce9ee12782bbaf2125ec2385d5fd732cbc2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default)))
+ '(package-selected-packages
+   (quote
+    (ensime spaceline spacemacs-theme helm-ag helm color-theme-sanityinc-tomorrow ujelly-theme yaml-mode use-package smartparens multi-web-mode which-key slack scala-mode python-mode projectile yatemplate popup-imenu play-routes-mode monokai-theme magit-find-file idea-darkula-theme highlight-symbol goto-chg find-file-in-repository etags-select undo-tree sbt-mode yasnippet company popup cyberpunk-theme ag ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(load "~/.emacs.d/ujelly-theme-source-code.el")
+(load-theme 'ujelly t)
