@@ -32,7 +32,7 @@
 (setq package-list
       '(ace-window avy ag s dash avy cyberpunk-theme popup s dash
                    company yasnippet sbt-mode undo-tree
-                   find-file-in-repository
+                   find-file-in-repository multi-term web-mode
                    goto-chg highlight-symbol idea-darkula-theme
                    magit-find-file dash magit magit-popup dash
                    async git-commit with-editor dash async
@@ -72,6 +72,23 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+
+;; multi-term
+
+(require 'multi-term)
+(setq multi-term-program "/bin/zsh")
+
+;; web-mode
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 
 (define-key input-decode-map "\e[1;2D" [S-left])  
 (define-key input-decode-map "\e[1;2C" [S-right])  
@@ -357,7 +374,7 @@
     ("f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "99473228af8c280ed5534952a1a687732c2450d076528c6363ec23febccccd7b" "99953b61ecd4c3e414a177934e888ce9ee12782bbaf2125ec2385d5fd732cbc2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default)))
  '(package-selected-packages
    (quote
-    (ensime spaceline spacemacs-theme helm-ag helm color-theme-sanityinc-tomorrow ujelly-theme yaml-mode use-package smartparens multi-web-mode which-key slack scala-mode python-mode projectile yatemplate popup-imenu play-routes-mode monokai-theme magit-find-file idea-darkula-theme highlight-symbol goto-chg find-file-in-repository etags-select undo-tree sbt-mode yasnippet company popup cyberpunk-theme ag ace-window))))
+    (web-mode ensime spaceline spacemacs-theme helm-ag helm color-theme-sanityinc-tomorrow ujelly-theme yaml-mode use-package smartparens multi-web-mode which-key slack scala-mode python-mode projectile yatemplate popup-imenu play-routes-mode monokai-theme magit-find-file idea-darkula-theme highlight-symbol goto-chg find-file-in-repository etags-select undo-tree sbt-mode yasnippet company popup cyberpunk-theme ag ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
