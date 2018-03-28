@@ -55,6 +55,25 @@
 					("melpa-stable" . "http://stable.melpa.org/packages/")
                     ("melpa" . "http://melpa.org/packages/")))
 
+; activate all the packages (in particular autoloads)
+(package-initialize)
+
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+;; custom options
+
+(when (not package-archive-contents)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+
 ;; multi-term
 
 (require 'multi-term)
@@ -352,11 +371,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "99473228af8c280ed5534952a1a687732c2450d076528c6363ec23febccccd7b" "99953b61ecd4c3e414a177934e888ce9ee12782bbaf2125ec2385d5fd732cbc2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default)))
+   '("f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "99473228af8c280ed5534952a1a687732c2450d076528c6363ec23febccccd7b" "99953b61ecd4c3e414a177934e888ce9ee12782bbaf2125ec2385d5fd732cbc2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default))
  '(package-selected-packages
-   (quote
-    (web-mode ensime spaceline spacemacs-theme helm-ag helm color-theme-sanityinc-tomorrow ujelly-theme yaml-mode use-package smartparens multi-web-mode which-key slack scala-mode python-mode projectile yatemplate popup-imenu play-routes-mode monokai-theme magit-find-file idea-darkula-theme highlight-symbol goto-chg find-file-in-repository etags-select undo-tree sbt-mode yasnippet company popup cyberpunk-theme ag ace-window))))
+   '(web-mode ensime spaceline spacemacs-theme helm-ag helm color-theme-sanityinc-tomorrow ujelly-theme yaml-mode use-package smartparens multi-web-mode which-key slack scala-mode python-mode projectile yatemplate popup-imenu play-routes-mode monokai-theme magit-find-file idea-darkula-theme highlight-symbol goto-chg find-file-in-repository etags-select undo-tree sbt-mode yasnippet company popup cyberpunk-theme ag ace-window)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
