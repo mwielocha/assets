@@ -54,24 +54,6 @@
                     ("org" . "http://orgmode.org/elpa/")
 					("melpa-stable" . "http://stable.melpa.org/packages/")
                     ("melpa" . "http://melpa.org/packages/")))
-; activate all the packages (in particular autoloads)
-(package-initialize)
-
-; fetch the list of packages available 
-(unless package-archive-contents
-  (package-refresh-contents))
-
-; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
-;; custom options
-
-(when (not package-archive-contents)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
 
 ;; multi-term
 
@@ -141,7 +123,7 @@
 (spaceline-emacs-theme)
 (spaceline-helm-mode)
 
-(set-default-font "Menlo 18")
+;;(set-default-font "Menlo 18")
 
 (tool-bar-mode 0)
 
@@ -380,7 +362,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Menlo")))))
 
 (load "~/.emacs.d/ujelly-theme-source-code.el")
 (load-theme 'ujelly t)
