@@ -211,6 +211,10 @@
           (delq (current-buffer) 
                 (remove-if-not 'buffer-file-name (buffer-list)))))
 
+(defun kill-all-buffers ()
+  (interactive)
+  (mapc 'kill-buffer (buffer-list)))
+
 ;; last change
 
 (global-set-key (kbd "<s-backspace>") 'goto-last-change)
@@ -246,6 +250,7 @@
 (require 'ensime)
 ;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'java-mode-hook 'ensime-scala-mode-hook)
+(setq ensime-startup-notification nil)
 
 (require 'magit-find-file)
 (global-set-key (kbd "C-c p") 'magit-find-file-completing-read)
