@@ -53,7 +53,7 @@ plugins=(git osx sbt scala python)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/libpq/11.1/bin"
 
 export GPG_TTY=$(tty)
 
