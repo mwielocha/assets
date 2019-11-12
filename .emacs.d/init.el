@@ -98,6 +98,10 @@
     (evil-define-key 'visual global-map "S" 'evil-surround-region)
     (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
 
+  (define-key evil-normal-state-map (kbd "M-.")
+    `(menu-item "" evil-repeat-pop :filter
+        ,(lambda (cmd) (if (eq last-command 'evil-repeat-pop) cmd))))
+
   (message "Loading evil-mode...done"))
 
 ;; ########## Scala
@@ -108,6 +112,13 @@
   (progn
     (setq exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-copy-env "PATH")))
+
+;; Enable defer and ensure by default for use-package
+;; Keep auto-save/backup files separate from source code:  https://github.com/scalameta/metals/issues/1027
+(setq use-package-always-defer t
+      use-package-always-ensure t
+      backup-directory-alist `((".*" . ,temporary-file-directory))
+      auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
 ;; Enable scala-mode and sbt-mode
 (use-package scala-mode
@@ -121,23 +132,32 @@
   (substitute-key-definition
    'minibuffer-complete-word
    'self-insert-command
-   minibuffer-local-completion-map))
+   minibuffer-local-completion-map)
+   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+   (setq sbt:program-options '("-Dsbt.supershell=false"))
+)
 
 ;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
   :init (global-flycheck-mode))
 
-(use-package lsp-mode)
+(use-package lsp-mode
+  ;; Optional - enable lsp-mode automatically in scala files
+  :hook (scala-mode . lsp)
+  :config  
+    (setq lsp-prefer-flymake nil)
+    (local-unset-key (kbd "M-."))
+  :bind (:map lsp-mode-map 
+    ("M-." . lsp-find-definition)
+    ("M-<down-mouse-1>" . lsp-find-definition-mouse))
+  )
 
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode))
+(use-package lsp-ui)
 
-(use-package lsp-scala
-  :load-path "/User/mwielocha/workspace/lsp-scala"
-  :after scala-mode
-  :demand t
-  ;; Optional - enable lsp-scala automatically in scala files
-  :hook (scala-mode . lsp))
+;; Add company-lsp backend for metals
+(use-package company-lsp)
+
+(use-package helm-lsp)
 
 (setq evil-want-keybinding nil)
 
@@ -158,10 +178,10 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 
-(global-set-key (kbd "s-p") 'ace-window)
+(global-set-key (kbd "M-p") 'ace-window)
 (setq aw-dispatch-always t)
 
-(global-set-key (kbd "s-=") 'toggle-frame-fullscreen)
+(global-set-key (kbd "M-=") 'toggle-frame-fullscreen)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -188,8 +208,8 @@
             ;; not going to the first hit?
             (lambda () (pop-to-buffer next-error-last-buffer)))
   :bind
-  (("s-f" . projectile-find-file)
-   ("s-F" . projectile-grep)))
+  (("M-f" . projectile-find-file)
+   ("M-F" . projectile-grep)))
 
 (load-theme 'ujelly t)
 
@@ -205,6 +225,7 @@
 (require 'spaceline-config)
 (spaceline-emacs-theme)
 (spaceline-helm-mode)
+(show-paren-mode)
 
 (define-key input-decode-map "\e[1;2D" [S-left])  
 (define-key input-decode-map "\e[1;2C" [S-right])  
@@ -213,15 +234,22 @@
 (define-key input-decode-map "\e[1;2F" [S-end])  
 (define-key input-decode-map "\e[1;2H" [S-home])
 
-(global-set-key (kbd "s-<up>") 'scroll-down-command)
-(global-set-key (kbd "s-<down>") 'scroll-up-command)
-(global-set-key (kbd "s-<left>") 'beginning-of-line)
-(global-set-key (kbd "s-<right>") 'end-of-line)
+(global-set-key (kbd "M-<up>") 'scroll-down-command)
+(global-set-key (kbd "M-<down>") 'scroll-up-command)
+(global-set-key (kbd "M-<left>") 'beginning-of-line)
+(global-set-key (kbd "M-<right>") 'end-of-line)
+(global-set-key (kbd "A-<right>") 'forward-word)
+(global-set-key (kbd "A-<left>") 'backward-word)
+(global-set-key (kbd "M-c") 'clipboard-kill-ring-save)
+(global-set-key (kbd "M-v") 'clipboard-yank)
+;; (global-set-key (kbd "M-x") 'clipboard-kill-region)
+(global-set-key (kbd "M-z") 'undo)
+(global-set-key (kbd "M-Z") 'redo)
 
-(global-set-key (kbd "s-w") 'mac-key-close-window)
-(global-set-key (kbd "s-l") 'goto-line)
+(global-set-key (kbd "M-w") 'mac-key-close-window)
+(global-set-key (kbd "M-l") 'goto-line)
 
-(setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home")
+(setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/openjdk-11.0.2.jdk/Contents/Home")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
