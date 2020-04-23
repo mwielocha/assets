@@ -17,6 +17,7 @@
   :defer .1 ;; don't block emacs when starting, load evil immediately after startup
   :init
   (setq evil-want-integration nil) ;; required by evil-collection
+  (setq evil-want-keybinding nil)
   (setq evil-search-module 'evil-search)
   (setq evil-ex-complete-emacs-commands nil)
   (setq evil-vsplit-window-right t) ;; like vim's 'splitright'
@@ -102,6 +103,8 @@
     `(menu-item "" evil-repeat-pop :filter
         ,(lambda (cmd) (if (eq last-command 'evil-repeat-pop) cmd))))
 
+  ;;(evil-select-search-module 'evil-search-module 'evil-search)
+  
   (message "Loading evil-mode...done"))
 
 ;; ########## Scala
@@ -113,17 +116,18 @@
     (setq exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-copy-env "PATH")))
 
-;; Enable defer and ensure by default for use-package
+  ;; Enable defer and ensure by default for use-package
 ;; Keep auto-save/backup files separate from source code:  https://github.com/scalameta/metals/issues/1027
 (setq use-package-always-defer t
       use-package-always-ensure t
       backup-directory-alist `((".*" . ,temporary-file-directory))
       auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
-;; Enable scala-mode and sbt-mode
+;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
   :mode "\\.s\\(cala\\|bt\\)$")
 
+;; Enable sbt mode for executing sbt commands
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
@@ -143,23 +147,37 @@
 
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
-  :hook (scala-mode . lsp)
-  :config  
-    (setq lsp-prefer-flymake nil)
-    (local-unset-key (kbd "M-."))
-  :bind (:map lsp-mode-map 
-    ("M-." . lsp-find-definition)
-    ("M-<down-mouse-1>" . lsp-find-definition-mouse))
-  )
+  :hook  (scala-mode . lsp)
+         (lsp-mode . lsp-lens-mode)
+  :config (setq lsp-prefer-flymake nil))
 
+;; Enable nice rendering of documentation on hover
 (use-package lsp-ui)
+
+;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
+;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
+;;   to avoid odd behavior with snippets and indentation
+(use-package yasnippet)
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp)
 
-(use-package helm-lsp)
+;; Use the Debug Adapter Protocol for running tests and debugging
+(use-package posframe
+  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+  )
+(use-package dap-mode
+  :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode)
+  )
 
-(setq evil-want-keybinding nil)
+;; Use the Tree View Protocol for viewing the project structure and triggering compilation
+(use-package lsp-treemacs
+  :config
+  (lsp-metals-treeview-enable t)
+  (setq lsp-metals-treeview-show-when-views-received t)
+  )
 
 ;; ########## Other
 
@@ -212,7 +230,9 @@
    ("M-F" . projectile-grep)))
 
 (load-theme 'ujelly t)
+;; macos modifiers
 
+(setq ns-command-modifier 'meta)
 ;; helm
 (require 'helm-config)
 (global-set-key (kbd "M-x") 'helm-M-x)
